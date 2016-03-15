@@ -130,7 +130,7 @@ bool Example::unittest()
   std::cout<<"Number of objects: " << sObj.size() << std::endl;
   std::cout<<"Number of pairs: " << sObj.size()*(sObj.size()-1)/2<< std::endl;
 
-  for (unsigned i=0; i<sObj.size(); ++i)
+  for (std::size_t i=0; i<sObj.size(); ++i)
   {
     //We can also get back our object pointers
     S_Object * ptr = sObj[i];
@@ -183,7 +183,7 @@ void Example::displayScene()
   //points) for all the scene, it returns the number of collisions.
   //Other implementations of the scene management could be considered for
   //future versions.
-  int collisionNbr = sObj.sceneProximityQuery();
+  sObj.sceneProximityQuery();
 
   for (unsigned i=0; i<sObj.size(); ++i)
   {
@@ -270,10 +270,10 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   }
   else if(objJ == "super2" && objI == "box2")
   {
-    dd = -0.31718567003746;
+    dd = -0.3171856700391;
     pd = 0;
-    dp1 << -1.787265308154, -1.1960497354292, 1.4450521781144 ;
-    dp2 << -2.2686354608106, -1.3706878827971, 1.6795089196526 ;
+    dp1 << -1.7872650515801, -1.1960501545466,  1.4450523927058;
+    dp2 << -2.2686353595604, -1.370687778546,  1.6795092051851;
   }
   else if(objJ == "super3" && objI == "box2")
   {
@@ -293,7 +293,7 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   {
     dd = 0.14762346168417;
     pd = 0.14762346168417;
-    dp1 << 0.29961124339566, 0.014926401743127, 0.97819026233414 ;
+    dp1 << 0.29961124339503, 0.014926401750322, 0.97819026234949;
     dp2 << -0.067084392233482, 0.11181124267447, 0.91678097889576 ;
   }
   else if(objJ == "super2" && objI == "box3")
@@ -466,10 +466,10 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   }
   else if(objJ == "sphere2" && objI == "sphere3")
   {
-    dd = -0.22676975704217;
+    dd = -0.22675683605797;
     pd = 0;
-    dp1 << 2.5376620746762, 1.098724063024, -0.64109671750724 ;
-    dp2 << 2.1249351701295, 1.1005103747904, -0.40356131299711 ;
+    dp1 << 2.5471551196237, 1.1052374543354, -0.62330870081606;
+    dp2 << 2.1211379521505, 1.0979050182659, -0.41067651967358;
   }
 
   bool res = true;
