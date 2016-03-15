@@ -3,12 +3,30 @@
 
 #include <boost/math/constants/constants.hpp>
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+
 const double DispersionScale=0.2;
 const double AnimationSpeed=0.003;
 const double AnimationScale=0.6;
 const long AnimationEnd =10000;
 const long RandomTestEnd=1000000;
 const double PI=boost::math::constants::pi<double>();
+
+namespace
+{
+  inline double nozero_rand()
+  {
+    double ret = 0;
+    while(ret == 0)
+    {
+      ret = rand()/double(RAND_MAX);
+    }
+    return ret;
+  }
+}
 
 using namespace sch;
 
@@ -30,17 +48,19 @@ void TestMaterial::RandomTestSupportFunction()
   std::vector<Vector3> supportVector(RandomTestEnd);
 
   clock_t begin, end;
-  srand(time(NULL));
+  unsigned int seed = time(NULL);
+  std::cout << "TestMaterial::RandomTestSupportFunction seed: " << seed << std::endl;
+  srand(seed);
 
   begin=clock();
 
   for (long j=0; j<RandomTestEnd; j++)
   {
 
-    double a = (rand()/double(RAND_MAX)) ;
-    double b = (rand()/double(RAND_MAX)) ;
-    double c = (rand()/double(RAND_MAX)) ;
-    double d = (rand()/double(RAND_MAX)) ;
+    double a = nozero_rand();
+    double b = nozero_rand();
+    double c = nozero_rand();
+    double d = nozero_rand();
 
     Vector3 v(sqrt(-2*log(a))*cos(2*PI*b),sqrt(-2*log(b))*cos(2*PI*a),sqrt(-2*log(c))*cos(2*PI*d));
 
@@ -70,17 +90,19 @@ void TestMaterial::RandomTestSupportFunctionAllObjects()
   std::cout << "RandomTestSupportFunctionAllObjects" << std::endl;
   std::vector<Vector3> supportVector(RandomTestEnd * sObj.size());
 
-  srand(time(NULL));
+  unsigned int seed = time(NULL);
+  std::cout << "TestMaterial::RandomTestSupportFunctionAllObjects seed: " << seed << std::endl;
+  srand(seed);
   clock_t begin, end;
 
   begin=clock();
 
   for (long j=0; j<RandomTestEnd; j++)
   {
-    double a = (rand()/double(RAND_MAX)) ;
-    double b = (rand()/double(RAND_MAX)) ;
-    double c = (rand()/double(RAND_MAX)) ;
-    double d = (rand()/double(RAND_MAX)) ;
+    double a = nozero_rand();
+    double b = nozero_rand();
+    double c = nozero_rand();
+    double d = nozero_rand();
 
     Vector3 v(sqrt(-2*log(a))*cos(2*PI*b),sqrt(-2*log(b))*cos(2*PI*a),sqrt(-2*log(c))*cos(2*PI*d));
 
@@ -663,3 +685,5 @@ void TestMaterial::GeneralTest()
   }
   outfile.close();
 }
+
+#pragma GCC diagnostic pop
