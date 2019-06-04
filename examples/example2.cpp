@@ -154,7 +154,7 @@ bool Example::unittest()
       double distance = sObj.getWitnessPoints(i,j,p1,p2);
 
 
-      std::cout << "Distance " << distance << i <<std::endl;
+      std::cout << "Distance " << distance << " " << i <<std::endl;
       std::cout <<"Witness points: "  << std::endl;
       std::cout <<"  P1: "<< p1 << std::endl;
       std::cout <<"  P2: "<< p2 << std::endl;
@@ -185,9 +185,15 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
 
   if(objJ== "poly" && objI == "stp1")
   {
+#ifdef BUILD_BSD
+    dd = 0.;
+    dp1.Set(0, 0, 0);
+    dp2.Set(0, 0, 0);
+#else
     dd = -0.003622207057881;
     dp1.Set( 0.157367547718, 0.68942718023, 0.891961713557);
     dp2.Set(0.0986621048016, 0.691217002621, 0.905102283015);
+#endif
   }
   else if(objJ == "poly" && objI == "stp2")
   {
