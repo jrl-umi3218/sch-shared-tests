@@ -271,7 +271,7 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   else if(objJ == "super2" && objI == "box2")
   {
     pd = 0;
-#ifdef BUILD_BSD
+#ifdef SCH_BUILD_BSD
     dd = 0;
     dp1.Set(0, 0, 0);
     dp2.Set(0, 0, 0);
@@ -305,7 +305,7 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   else if(objJ == "super2" && objI == "box3")
   {
     pd = 0;
-#ifdef BUILD_BSD
+#ifdef SCH_BUILD_BSD
     dd = 0;
     dp1.Set(0, 0, 0);
     dp2.Set(0, 0, 0);
@@ -332,7 +332,7 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   else if(objJ == "box2" && objI == "box3")
   {
     pd = 0;
-#ifdef BUILD_BSD
+#ifdef SCH_BUILD_BSD
     dd = 0;
     dp1.Set(0, 0, 0);
     dp2.Set(0, 0, 0);
@@ -485,7 +485,7 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   else if(objJ == "sphere2" && objI == "sphere3")
   {
     pd = 0;
-#ifdef BUILD_BSD
+#ifdef SCH_BUILD_BSD
     dd = 0;
     dp1.Set(0, 0, 0);
     dp2.Set(0, 0, 0);

@@ -185,7 +185,7 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
 
   if(objJ== "poly" && objI == "stp1")
   {
-#ifdef BUILD_BSD
+#ifdef SCH_BUILD_BSD
     dd = 0.;
     dp1.Set(0, 0, 0);
     dp2.Set(0, 0, 0);
