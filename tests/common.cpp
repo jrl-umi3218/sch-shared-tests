@@ -13,6 +13,8 @@ const double PI=boost::math::constants::pi<double>();
 using namespace sch;
 
 
+
+
 void TestMaterial::DoTest()
 {
   sObj.sceneProximityQuery();
@@ -126,6 +128,7 @@ void TestMaterial::initializeUniverse()
     sObj.addObject(new S_Superellipsoid(.11,.30,.14,0.4,0.8));
     sObj.addObject(new S_Point());
     sObj.addObject(new S_Capsule(Point3(0.1,0.1,0.1),Point3(-0.1,-0.1,-0.1),0.2));
+    sObj.addObject(new S_Cone(0.01,0.3));
 
     std::cout << "8 Non-STP BV Objects added to scene" << std::endl;
   }
