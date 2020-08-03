@@ -128,9 +128,10 @@ void TestMaterial::initializeUniverse()
     sObj.addObject(new S_Superellipsoid(.11,.30,.14,0.4,0.8));
     sObj.addObject(new S_Point());
     sObj.addObject(new S_Capsule(Point3(0.1,0.1,0.1),Point3(-0.1,-0.1,-0.1),0.2));
-    sObj.addObject(new S_Cone(0.01,0.3));
+    sObj.addObject(new S_Cone(0.5,0.3));
+    sObj.addObject(new S_Cylinder(Point3(0.1,0.1,0.1),Point3(-0.1,-0.1,-0.1),0.2));
 
-    std::cout << "8 Non-STP BV Objects added to scene" << std::endl;
+    std::cout << "10 Non-STP BV Objects added to scene" << std::endl;
   }
 
 #ifdef MULTI_OBJECTS_TEST
@@ -179,7 +180,7 @@ void TestMaterial::initializeUniverse()
 
     std::cout << "Multi Object loaded and added to the scene" << std::endl;
   }
-#else
+//#else
   {
     STP_BV* s1 = new STP_BV();
     s1->constructFromFileWithGL("sample_stpbv1.txt");
