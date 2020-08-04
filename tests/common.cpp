@@ -180,7 +180,7 @@ void TestMaterial::initializeUniverse()
 
     std::cout << "Multi Object loaded and added to the scene" << std::endl;
   }
-//#else
+#else
   {
     STP_BV* s1 = new STP_BV();
     s1->constructFromFileWithGL("sample_stpbv1.txt");
