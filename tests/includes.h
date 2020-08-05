@@ -3,6 +3,8 @@
 #include <sch/S_Object/S_Superellipsoid.h>
 #include <sch/S_Object/S_Point.h>
 #include <sch/S_Object/S_Capsule.h>
+#include <sch/S_Object/S_Cone.h>
+#include <sch/S_Object/S_Cylinder.h>
 #include <sch/STP-BV/STP_BV.h>
 #include <sch/CD/CD_Pair.h>
 #include <sch/CD/CD_Scene.h>

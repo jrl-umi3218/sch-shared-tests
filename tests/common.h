@@ -43,7 +43,7 @@ struct TestMaterial
   void GeneralTest();
 
   sch::CD_Scene sObj;
-
+ 
   unsigned int CurrentObj;
 
 

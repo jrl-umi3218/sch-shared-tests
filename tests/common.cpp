@@ -13,6 +13,8 @@ const double PI=boost::math::constants::pi<double>();
 using namespace sch;
 
 
+
+
 void TestMaterial::DoTest()
 {
   sObj.sceneProximityQuery();
@@ -126,8 +128,10 @@ void TestMaterial::initializeUniverse()
     sObj.addObject(new S_Superellipsoid(.11,.30,.14,0.4,0.8));
     sObj.addObject(new S_Point());
     sObj.addObject(new S_Capsule(Point3(0.1,0.1,0.1),Point3(-0.1,-0.1,-0.1),0.2));
+    sObj.addObject(new S_Cone(0.5,0.3));
+    sObj.addObject(new S_Cylinder(Point3(0.1,0.1,0.1),Point3(-0.1,-0.1,-0.1),0.2));
 
-    std::cout << "8 Non-STP BV Objects added to scene" << std::endl;
+    std::cout << "10 Non-STP BV Objects added to scene" << std::endl;
   }
 
 #ifdef MULTI_OBJECTS_TEST
@@ -191,9 +195,9 @@ void TestMaterial::initializeUniverse()
   for (size_t i=0; i<sObj.size(); i++)
   {
     Vector3 position(
-      (1.+7*i%5-3.),
-      (5*i%6-3.)*(5.0/6.),
-      (5*i%7-3.)*(5.0/7.)
+      Scalar(7*i%5)-2.,
+      (Scalar(5*i%6)-3.)*(5.0/6.),
+      (Scalar(5*i%7)-3.)*(5.0/7.)
     );
     position *= DispersionScale;
     sObj[i]->setPosition(position);
@@ -231,9 +235,9 @@ void TestMaterial::initializeUniverse(const std::vector<std::string> & filenameL
   for (size_t i=0; i<sObj.size(); i++)
   {
     Vector3 position(
-      (1.+7*i%5-3.),
-      (5*i%6-3.)*(5.0/6.),
-      (5*i%7-3.)*(5.0/7.)
+      Scalar(7*i%5)-2.,
+      (Scalar(5*i%6)-3.)*(5.0/6.),
+      (Scalar(5*i%7)-3.)*(5.0/7.)
     );
     position *= DispersionScale;
     sObj[i]->setPosition(position);
@@ -286,11 +290,11 @@ void TestMaterial::TestPrecision()
 
   for (long i=0; i<AnimationEnd; i++)
   {
-    axe[i][0] =  sin((42)*sin(0.2*AnimationSpeed)*(i%87%3));
-    axe[i][1] =  sin((-43)*sin(0.2*AnimationSpeed)*(i%73%3));
-    axe[i][2] =  cos((83)*sin(0.1*AnimationSpeed)*(i%89%3));
+    axe[i][0] =  sin((42)*sin(0.2*AnimationSpeed)*Scalar(i%87%3));
+    axe[i][1] =  sin((-43)*sin(0.2*AnimationSpeed)*Scalar(i%73%3));
+    axe[i][2] =  cos((83)*sin(0.1*AnimationSpeed)*Scalar(i%89%3));
 
-    angle[i]=4*sin((97)*sin(0.2*sin(0.5*AnimationSpeed))*(i%79%3));
+    angle[i]=4*sin((97)*sin(0.2*sin(0.5*AnimationSpeed))*Scalar(i%79%3));
 
     /*sObj[j]->addTranslation(Vector3(sin((20*(1))*sin(0.2*AnimationSpeed))*(i%67%3),
     sin((71-140*(1))*sin(0.15*AnimationSpeed))*(i%59%3),
@@ -315,7 +319,9 @@ void TestMaterial::TestPrecision()
       {
         Point3 p1,p2;
         Scalar distance=sObj.getWitnessPoints(k,j,p1,p2);
-# ifdef OUTPUT_FILE
+# ifndef OUTPUT_FILE
+        (void) distance; ///preventing unsused variable warning
+#else
         outfile<<p1<<p2<<distance<<std::endl;
 # endif
       }
@@ -399,9 +405,9 @@ void TestMaterial::TestAnimation()
 
   for (size_t i=0; i<sObj.size(); i++)
   {
-    position[0] =(1.+7*i%5-3.)*DispersionScale;
-    position[1] =((5*i%6-3.)*(5.0/6.))*DispersionScale;
-    position[2] =((5*i%7-3.)*(5.0/7.))*DispersionScale;
+    position[0] =(Scalar(7*i%5)-2.)*DispersionScale;
+    position[1] =((Scalar(5*i%6)-3.)*(5.0/6.))*DispersionScale;
+    position[2] =((Scalar(5*i%7)-3.)*(5.0/7.))*DispersionScale;
 
     oldPos.push_back(position);
 
@@ -444,18 +450,21 @@ void TestMaterial::TestAnimation()
     {
       position=oldPos[j];
 
-      axe[0] =  sin((42+j)*sin(0.2*AnimationSpeed*i));
-      axe[1] =  sin((-43-j)*sin(0.2*AnimationSpeed*i));
-      axe[2] =  cos((83+j)*sin(0.1*AnimationSpeed*i));
+      Scalar is= Scalar(i), js = Scalar(j);
 
-      angle=4*sin((97-j)*sin(0.2*sin(0.5*AnimationSpeed*i)));
+
+      axe[0] =  sin((42+js)*sin(0.2*AnimationSpeed*is));
+      axe[1] =  sin((-43-js)*sin(0.2*AnimationSpeed*is));
+      axe[2] =  cos((83+js)*sin(0.1*AnimationSpeed*is));
+
+      angle=4*sin((97-js)*sin(0.2*sin(0.5*AnimationSpeed*is)));
 
 
       sObj[j]->setOrientation(angle,axe);
 
-      sObj[j]->setPosition( position + Vector3(sin((20*(j%3+1)+2*j)*sin(0.2*AnimationSpeed*i)),
-                            sin((71-140*(j%2-1)+2*j)*sin(0.15*AnimationSpeed*i)),
-                            sin((20+((j*5)%7)*5+3*j)*sin(0.2*AnimationSpeed*i)))*AnimationScale);
+      sObj[j]->setPosition( position + Vector3(sin((20*Scalar(j%3+1)+2*js)*sin(0.2*AnimationSpeed*is)),
+                            sin(Scalar(71-140*(j%2-1)+2*j)*sin(0.15*AnimationSpeed*is)),
+                            sin(Scalar(20+((j*5)%7)*5+3*j)*sin(0.2*AnimationSpeed*is)))*AnimationScale);
     }
 
 
@@ -469,7 +478,9 @@ void TestMaterial::TestAnimation()
       {
         Point3 p1,p2;
         Scalar distance=sObj.getWitnessPoints(k,j,p1,p2);
-# ifdef OUTPUT_FILE
+# ifndef OUTPUT_FILE        
+        (void) distance; ///prevent warning about unused variable
+# else
         outfile<<p1<<p2<<distance<<std::endl;
 # endif
       }
@@ -604,7 +615,7 @@ void TestMaterial::GeneralTest()
     }
     end=clock();
 
-    double lostTime=end-begin;
+    clock_t lostTime=end-begin;
 
     begin=clock();
     for (long j=0; j<RandomTestEnd; j++)
@@ -618,7 +629,10 @@ void TestMaterial::GeneralTest()
 
 #ifdef DO_TEST
       Point3 p=testscene[1]->support(v);
-# ifdef OUTPUT_FILE
+
+# ifndef OUTPUT_FILE
+      (void) p;
+#else
       outfile<<p<<std::endl;
 # endif // OUTPUT_FILE
 
@@ -636,17 +650,18 @@ void TestMaterial::GeneralTest()
 
     for (long i=0; i<AnimationEnd; i++)
     {
-      axe[0] =  sin((42)*sin(0.2*AnimationSpeed*i));
-      axe[1] =  sin((-43)*sin(0.2*AnimationSpeed*i));
-      axe[2] =  cos((83)*sin(0.1*AnimationSpeed*i));
+      Scalar is= Scalar(i);
+      axe[0] =  sin((42)*sin(0.2*AnimationSpeed*is));
+      axe[1] =  sin((-43)*sin(0.2*AnimationSpeed*is));
+      axe[2] =  cos((83)*sin(0.1*AnimationSpeed*is));
 
-      angle=4*sin((97)*sin(0.2*sin(0.5*AnimationSpeed*i)));
+      angle=4*sin((97)*sin(0.2*sin(0.5*AnimationSpeed*is)));
 
       testscene[1]->setOrientation(angle,axe);
 
-      testscene[1]->setPosition( position + Vector3(sin((20*(1))*sin(0.2*AnimationSpeed*i)),
-                                 sin((71-140*(1))*sin(0.15*AnimationSpeed*i)),
-                                 sin((20)*sin(0.2*AnimationSpeed*i)))*AnimationScale);
+      testscene[1]->setPosition( position + Vector3(sin((20*(1))*sin(0.2*AnimationSpeed*is)),
+                                 sin((71-140*(1))*sin(0.15*AnimationSpeed*is)),
+                                 sin((20)*sin(0.2*AnimationSpeed*is)))*AnimationScale);
     }
 
     end=clock();
@@ -657,17 +672,18 @@ void TestMaterial::GeneralTest()
 
     for (long i=0; i<AnimationEnd; i++)
     {
-      axe[0] =  sin((42)*sin(0.2*AnimationSpeed*i));
-      axe[1] =  sin((-43)*sin(0.2*AnimationSpeed*i));
-      axe[2] =  cos((83)*sin(0.1*AnimationSpeed*i));
+      Scalar is = Scalar(i);
+      axe[0] =  sin((42)*sin(0.2*AnimationSpeed*is));
+      axe[1] =  sin((-43)*sin(0.2*AnimationSpeed*is));
+      axe[2] =  cos((83)*sin(0.1*AnimationSpeed*is));
 
-      angle=4*sin((97)*sin(0.2*sin(0.5*AnimationSpeed*i)));
+      angle=4*sin((97)*sin(0.2*sin(0.5*AnimationSpeed*is)));
 
       testscene[1]->setOrientation(angle,axe);
 
-      testscene[1]->setPosition( position + Vector3(sin((20*(1))*sin(0.2*AnimationSpeed*i)),
-                                 sin((71-140*(1))*sin(0.15*AnimationSpeed*i)),
-                                 sin((20)*sin(0.2*AnimationSpeed*i)))*AnimationScale);
+      testscene[1]->setPosition( position + Vector3(sin((20*(1))*sin(0.2*AnimationSpeed*is)),
+                                 sin((71-140*(1))*sin(0.15*AnimationSpeed*is)),
+                                 sin((20)*sin(0.2*AnimationSpeed*is)))*AnimationScale);
 
 #ifdef DO_TEST
       testscene.sceneProximityQuery();
