@@ -185,6 +185,8 @@ void Example::displayScene()
   //future versions.
   int collisionNbr = sObj.sceneProximityQuery();
 
+  (void) collisionNbr; ///prevent warning for unused variable
+
   for (unsigned i=0; i<sObj.size(); ++i)
   {
     for (unsigned j=0; j<i; ++j)
