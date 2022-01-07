@@ -501,11 +501,17 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   bool res = true;
 
   double epsilon = 1e-6;
+  double pepsilon = epsilon;
+
+#if defined __i386__ || defined __aarch64__
+  epsilon = 1e-4;
+  pepsilon = 1e-1;
+#endif
 
   res = compare(distance, dd, "distance ("+objI +", "+objJ+"): ", epsilon) && res;
   res = compare(penetration, pd, "penetration ("+objI +", "+objJ+"): ", epsilon) && res;
-  res = compare(p1, dp1, "p1 ("+objI +", "+objJ+"): ", epsilon) && res;
-  res = compare(p2, dp2, "p2 ("+objI +", "+objJ+"): ", epsilon) && res;
+  res = compare(p1, dp1, "p1 ("+objI +", "+objJ+"): ", pepsilon) && res;
+  res = compare(p2, dp2, "p2 ("+objI +", "+objJ+"): ", pepsilon) && res;
   return res;
 }
 
