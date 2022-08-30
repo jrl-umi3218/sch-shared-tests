@@ -1,14 +1,13 @@
 #include "common.h"
 #include <fstream>
 
-#include <boost/math/constants/constants.hpp>
-
 const double DispersionScale=0.2;
 const double AnimationSpeed=0.003;
 const double AnimationScale=0.6;
 const long AnimationEnd =10000;
 const long RandomTestEnd=1000000;
-const double PI=boost::math::constants::pi<double>();
+/** value from boost/math/constant */
+const double PI=3.141592653589793238462643383279502884e+00;
 
 using namespace sch;
 
