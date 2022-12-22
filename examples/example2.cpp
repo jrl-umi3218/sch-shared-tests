@@ -153,8 +153,7 @@ bool Example::unittest()
 
       double distance = sObj.getWitnessPoints(i,j,p1,p2);
 
-
-      std::cout << "Distance " << distance << " " << i <<std::endl;
+      std::cout << "Distance " << distance << std::endl;
       std::cout <<"Witness points: "  << std::endl;
       std::cout <<"  P1: "<< p1 << std::endl;
       std::cout <<"  P2: "<< p2 << std::endl;
