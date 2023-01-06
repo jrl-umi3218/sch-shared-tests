@@ -275,8 +275,8 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
     pd = 0;
 #ifdef SCH_BUILD_BSD
     dd = 0;
-    dp1.Set(0, 0, 0);
-    dp2.Set(0, 0, 0);
+    dp1.Set(-2.4382016429023, -0.34453137974329, 1.0149926815109);
+    dp2.Set(-2.8034902987202, -1.9213950463338, 0.1711823973004);
 #else
     dd = -0.31718567003746;
     dp1.Set(-1.787265308154, -1.1960497354292, 1.4450521781144);
@@ -309,8 +309,8 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
     pd = 0;
 #ifdef SCH_BUILD_BSD
     dd = 0;
-    dp1.Set(0, 0, 0);
-    dp2.Set(0, 0, 0);
+    dp1.Set(-1.9129702551419, -1.8621316732081, 1.5487339817517);
+    dp2.Set(-3.6588197853564, -1.4067952284442, 2.6612783998353);
 #else
     dd = -0.88486848336054;
     dp1.Set(-1.8258028062901, -1.2035457346373, 1.5672994449862);
@@ -336,8 +336,8 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
     pd = 0;
 #ifdef SCH_BUILD_BSD
     dd = 0;
-    dp1.Set(0, 0, 0);
-    dp2.Set(0, 0, 0);
+    dp1.Set(-2.060158969655, -0.96192382874358, -0.44271785342942);
+    dp2.Set(-2.7940854586392, -2.1938370874621, 2.9310925142747);
 #else
     dd = -1.7306786763394;
     dp1.Set(-1.1518981590561, -1.0179317129611, 1.6120145906702);
@@ -489,8 +489,8 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
     pd = 0;
 #ifdef SCH_BUILD_BSD
     dd = 0;
-    dp1.Set(0, 0, 0);
-    dp2.Set(0, 0, 0);
+    dp1.Set(2.1492688089833, 1.1, -0.89756666333404);
+    dp2.Set(2.2802924764067, 1.1, -0.30097333466639);
 #else
     dd = -0.22676975704217;
     dp1.Set(2.5376620746762, 1.098724063024, -0.64109671750724);

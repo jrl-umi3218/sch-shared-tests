@@ -153,8 +153,7 @@ bool Example::unittest()
 
       double distance = sObj.getWitnessPoints(i,j,p1,p2);
 
-
-      std::cout << "Distance " << distance << " " << i <<std::endl;
+      std::cout << "Distance " << distance << std::endl;
       std::cout <<"Witness points: "  << std::endl;
       std::cout <<"  P1: "<< p1 << std::endl;
       std::cout <<"  P2: "<< p2 << std::endl;
@@ -187,8 +186,8 @@ bool verifyResult(const std::string & objI, const std::string & objJ,
   {
 #ifdef SCH_BUILD_BSD
     dd = 0.;
-    dp1.Set(0, 0, 0);
-    dp2.Set(0, 0, 0);
+    dp1.Set(0.121221802197878, 0.759159100278684162432796, 0.8579643029474862681027);
+    dp2.Set(0.131381168845752, 0.628304262885003295124874, 0.8892843622212902587875);
 #else
     dd = -0.003622207057881;
     dp1.Set( 0.157367547718, 0.68942718023, 0.891961713557);
